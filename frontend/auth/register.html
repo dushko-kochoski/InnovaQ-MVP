@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create account | InnovaQ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ───────────────────────── Shared nav ───────────────────────── -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/index.html" class="text-2xl font-extrabold tracking-tight text-indigo-600">Innova<span class="text-slate-900">Q</span></a>
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="/solutions/accounting.html" class="hover:text-indigo-600">Accounting</a>
+        <a href="/solutions/trade.html" class="hover:text-indigo-600">Trade</a>
+        <a href="/solutions/real-estate.html" class="hover:text-indigo-600">Real Estate</a>
+        <a href="/solutions/logistics.html" class="hover:text-indigo-600">Logistics</a>
+        <a href="/solutions/healthcare.html" class="hover:text-indigo-600">Healthcare</a>
+        <span class="text-slate-300">|</span>
+        <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
+        <a href="/about.html" class="hover:text-indigo-600">About</a>
+        <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+    </nav>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center px-4 py-16">
+    <div class="w-full max-w-md">
+      <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+        <h1 class="text-2xl font-bold text-slate-900">Create your account</h1>
+        <p class="mt-1 text-sm text-slate-500">Free to start — your first workflow takes ten minutes.</p>
+
+        <form id="register-form" class="mt-6 space-y-5">
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700">Work email</label>
+            <input type="email" id="email" required autocomplete="email"
+              class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="you@company.mk">
+          </div>
+          <div>
+            <label for="password" class="block text-sm font-medium text-slate-700">Password</label>
+            <input type="password" id="password" required minlength="8" autocomplete="new-password"
+              class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="At least 8 characters">
+          </div>
+          <div>
+            <label for="company" class="block text-sm font-medium text-slate-700">Company <span class="text-slate-400">(optional)</span></label>
+            <input type="text" id="company" autocomplete="organization"
+              class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="e.g. Stojanovski Konsalting DOOEL">
+          </div>
+          <p id="error" class="text-sm text-red-600 hidden"></p>
+          <button type="submit" id="submit-btn"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+            Create account
+          </button>
+        </form>
+
+        <p class="mt-6 text-sm text-center text-slate-500">
+          Already have an account?
+          <a href="/auth/login.html" class="text-indigo-600 font-semibold hover:underline">Log in</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ───────────────────────── Shared footer ───────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+      <div>
+        <a href="/index.html" class="text-2xl font-extrabold text-white">Innova<span class="text-indigo-400">Q</span></a>
+        <p class="mt-3 text-sm text-slate-400">Workflow automation for small and medium businesses in North Macedonia. Built in Skopje.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/solutions/accounting.html" class="hover:text-white">Accounting</a></li>
+          <li><a href="/solutions/trade.html" class="hover:text-white">Wholesale Trade</a></li>
+          <li><a href="/solutions/real-estate.html" class="hover:text-white">Real Estate</a></li>
+          <li><a href="/solutions/logistics.html" class="hover:text-white">Logistics</a></li>
+          <li><a href="/solutions/healthcare.html" class="hover:text-white">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about.html" class="hover:text-white">About us</a></li>
+          <li><a href="/pricing.html" class="hover:text-white">Pricing</a></li>
+          <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Get started</h3>
+        <p class="mt-3 text-sm text-slate-400">Your first workflow takes ten minutes.</p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">© 2026 InnovaQ DOOEL Skopje. All rights reserved.</div>
+  </footer>
+
+  <script src="/config.js"></script>
+  <script>
+    const API = window.API_BASE_URL;
+
+    document.getElementById("register-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const errorEl = document.getElementById("error");
+      const button = document.getElementById("submit-btn");
+      errorEl.classList.add("hidden");
+      button.disabled = true;
+      button.textContent = "Creating account…";
+
+      try {
+        const company = document.getElementById("company").value.trim();
+        const res = await fetch(API + "/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("email").value.trim(),
+            password: document.getElementById("password").value,
+            company_name: company || null,
+          }),
+        });
+
+        if (res.status === 201) {
+          window.location.href = "/auth/login.html?registered=1";
+          return;
+        }
+        if (res.status === 409) {
+          errorEl.textContent = "That email is already registered — try logging in instead.";
+        } else if (res.status === 422) {
+          errorEl.textContent = "Please check your details: valid email and a password of at least 8 characters.";
+        } else {
+          errorEl.textContent = "Registration failed (" + res.status + "). Please try again.";
+        }
+      } catch (err) {
+        errorEl.textContent = "Could not reach the server at " + API + " — is the backend running?";
+      }
+      errorEl.classList.remove("hidden");
+      button.disabled = false;
+      button.textContent = "Create account";
+    });
+  </script>
+</body>
+</html>

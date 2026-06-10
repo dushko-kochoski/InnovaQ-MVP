@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Workflows | InnovaQ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ───────────────────────── Shared nav ───────────────────────── -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/index.html" class="text-2xl font-extrabold tracking-tight text-indigo-600">Innova<span class="text-slate-900">Q</span></a>
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="/solutions/accounting.html" class="hover:text-indigo-600">Accounting</a>
+        <a href="/solutions/trade.html" class="hover:text-indigo-600">Trade</a>
+        <a href="/solutions/real-estate.html" class="hover:text-indigo-600">Real Estate</a>
+        <a href="/solutions/logistics.html" class="hover:text-indigo-600">Logistics</a>
+        <a href="/solutions/healthcare.html" class="hover:text-indigo-600">Healthcare</a>
+        <span class="text-slate-300">|</span>
+        <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
+        <a href="/about.html" class="hover:text-indigo-600">About</a>
+        <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- App tab bar -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-6 text-sm font-medium">
+      <a href="/app/dashboard.html" class="py-3 border-b-2 border-transparent text-slate-600 hover:text-indigo-600">Dashboard</a>
+      <a href="/app/workflows.html" class="py-3 border-b-2 border-indigo-600 text-indigo-600">My Workflows</a>
+      <a href="/app/templates.html" class="py-3 border-b-2 border-transparent text-slate-600 hover:text-indigo-600">Template Library</a>
+      <button id="logout-btn" class="ml-auto py-3 text-slate-500 hover:text-red-600">Log out</button>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <h1 class="text-3xl font-bold text-slate-900">My Workflows</h1>
+      <button id="new-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">+ New workflow</button>
+    </div>
+
+    <!-- New workflow form (hidden by default; shown via button or ?new=1) -->
+    <div id="new-form" class="hidden mt-6 bg-white rounded-xl border border-indigo-200 p-6">
+      <h2 class="font-bold text-slate-900">Create a workflow</h2>
+      <p class="mt-1 text-sm text-slate-500">Starts as a draft with a webhook trigger — add conditions and actions later, or <a href="/app/templates.html" class="text-indigo-600 hover:underline">install a template</a> instead.</p>
+      <div class="mt-4 grid gap-4 sm:grid-cols-3">
+        <input id="new-name" type="text" placeholder="Workflow name" class="rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:col-span-2">
+        <select id="new-niche" class="rounded-lg border border-slate-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <option value="accounting">Accounting</option>
+          <option value="trade">Wholesale Trade</option>
+          <option value="real_estate">Real Estate</option>
+          <option value="logistics">Logistics</option>
+          <option value="healthcare">Healthcare</option>
+        </select>
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="create-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Create</button>
+        <button id="cancel-btn" class="text-sm text-slate-500 hover:text-slate-700 px-3">Cancel</button>
+        <p id="form-error" class="text-sm text-red-600 self-center"></p>
+      </div>
+    </div>
+
+    <!-- Workflows table -->
+    <div class="mt-6 bg-white rounded-xl border border-slate-200 overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-left text-slate-500">
+          <tr>
+            <th class="px-5 py-3 font-medium">Name</th>
+            <th class="px-5 py-3 font-medium">Niche</th>
+            <th class="px-5 py-3 font-medium">Status</th>
+            <th class="px-5 py-3 font-medium">Webhook URL</th>
+            <th class="px-5 py-3 font-medium text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rows" class="divide-y divide-slate-100">
+          <tr><td colspan="5" class="px-5 py-10 text-center text-slate-400">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- ───────────────────────── Shared footer ───────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+      <div>
+        <a href="/index.html" class="text-2xl font-extrabold text-white">Innova<span class="text-indigo-400">Q</span></a>
+        <p class="mt-3 text-sm text-slate-400">Workflow automation for small and medium businesses in North Macedonia. Built in Skopje.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/solutions/accounting.html" class="hover:text-white">Accounting</a></li>
+          <li><a href="/solutions/trade.html" class="hover:text-white">Wholesale Trade</a></li>
+          <li><a href="/solutions/real-estate.html" class="hover:text-white">Real Estate</a></li>
+          <li><a href="/solutions/logistics.html" class="hover:text-white">Logistics</a></li>
+          <li><a href="/solutions/healthcare.html" class="hover:text-white">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about.html" class="hover:text-white">About us</a></li>
+          <li><a href="/pricing.html" class="hover:text-white">Pricing</a></li>
+          <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Get started</h3>
+        <p class="mt-3 text-sm text-slate-400">Your first workflow takes ten minutes.</p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">© 2026 InnovaQ DOOEL Skopje. All rights reserved.</div>
+  </footer>
+
+  <script src="/config.js"></script>
+  <script>
+    const API = window.API_BASE_URL;
+    const NICHE_LABELS = {
+      accounting: "Accounting",
+      trade: "Wholesale Trade",
+      real_estate: "Real Estate",
+      logistics: "Logistics",
+      healthcare: "Healthcare",
+    };
+
+    async function api(path, options = {}) {
+      const res = await fetch(API + path, {
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        ...options,
+      });
+      if (res.status === 401) {
+        window.location.replace("/index.html");
+        throw new Error("unauthenticated");
+      }
+      return res;
+    }
+
+    function esc(value) {
+      const div = document.createElement("div");
+      div.textContent = String(value ?? "");
+      return div.innerHTML;
+    }
+
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      try { await api("/auth/logout", { method: "POST" }); } catch (e) {}
+      window.location.replace("/index.html");
+    });
+
+    // ── New workflow form ──────────────────────────────────────────────
+    const newForm = document.getElementById("new-form");
+    document.getElementById("new-btn").addEventListener("click", () => newForm.classList.toggle("hidden"));
+    document.getElementById("cancel-btn").addEventListener("click", () => newForm.classList.add("hidden"));
+    if (new URLSearchParams(window.location.search).get("new") === "1") {
+      newForm.classList.remove("hidden");
+    }
+
+    document.getElementById("create-btn").addEventListener("click", async () => {
+      const name = document.getElementById("new-name").value.trim();
+      const errorEl = document.getElementById("form-error");
+      errorEl.textContent = "";
+      if (!name) { errorEl.textContent = "Name is required."; return; }
+      const res = await api("/v1/workflows", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          niche: document.getElementById("new-niche").value,
+          status: "draft",
+          steps: [{ step: 1, type: "trigger", action_type: "webhook_receive" }],
+        }),
+      });
+      if (!res.ok) { errorEl.textContent = "Create failed (" + res.status + ")."; return; }
+      document.getElementById("new-name").value = "";
+      newForm.classList.add("hidden");
+      await load();
+    });
+
+    // ── Table ──────────────────────────────────────────────────────────
+    async function setStatus(workflowId, status) {
+      await api("/v1/workflows/" + workflowId, {
+        method: "PUT",
+        body: JSON.stringify({ status }),
+      });
+      await load();
+    }
+
+    async function removeWorkflow(workflowId, name) {
+      if (!window.confirm('Delete workflow "' + name + '"? This cannot be undone.')) return;
+      await api("/v1/workflows/" + workflowId, { method: "DELETE" });
+      await load();
+    }
+
+    function statusControls(workflow) {
+      // active ⇄ paused toggle; drafts get an Activate button
+      if (workflow.status === "active") {
+        return `<button data-action="pause" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 hover:bg-emerald-200" title="Click to pause">● active</button>`;
+      }
+      if (workflow.status === "paused") {
+        return `<button data-action="activate" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 hover:bg-amber-200" title="Click to activate">❚❚ paused</button>`;
+      }
+      return `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 mr-1">draft</span>
+        <button data-action="activate" class="text-xs font-semibold text-indigo-600 hover:underline">Activate</button>`;
+    }
+
+    async function load() {
+      const workflows = await (await api("/v1/workflows")).json();
+      const rows = document.getElementById("rows");
+      if (workflows.length === 0) {
+        rows.innerHTML =
+          '<tr><td colspan="5" class="px-5 py-10 text-center text-slate-400">' +
+          'No workflows yet. Create one above or <a href="/app/templates.html" class="text-indigo-600 hover:underline">install a template</a>.</td></tr>';
+        return;
+      }
+      rows.innerHTML = workflows
+        .map(
+          (w) => `<tr data-id="${esc(w.workflow_id)}" data-name="${esc(w.name)}">
+            <td class="px-5 py-3 font-medium">${esc(w.name)}</td>
+            <td class="px-5 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(NICHE_LABELS[w.niche] || w.niche)}</span></td>
+            <td class="px-5 py-3 whitespace-nowrap">${statusControls(w)}</td>
+            <td class="px-5 py-3"><code class="text-xs text-slate-500">/v1/triggers/webhook/${esc(w.route_key)}</code></td>
+            <td class="px-5 py-3 text-right"><button data-action="delete" class="text-xs font-semibold text-red-600 hover:underline">Delete</button></td>
+          </tr>`
+        )
+        .join("");
+    }
+
+    document.getElementById("rows").addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+      const row = button.closest("tr");
+      const id = row.dataset.id;
+      const action = button.dataset.action;
+      if (action === "pause") setStatus(id, "paused");
+      else if (action === "activate") setStatus(id, "active");
+      else if (action === "delete") removeWorkflow(id, row.dataset.name);
+    });
+
+    load().catch((err) => console.error(err));
+  </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InnovaQ — Workflow Automation for Macedonian SMEs</title>
+  <meta name="description" content="InnovaQ automates invoices, stock alerts, appointment reminders and more for small businesses across North Macedonia.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- ───────────────────────── Shared nav ───────────────────────── -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/index.html" class="text-2xl font-extrabold tracking-tight text-indigo-600">Innova<span class="text-slate-900">Q</span></a>
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="/solutions/accounting.html" class="hover:text-indigo-600">Accounting</a>
+        <a href="/solutions/trade.html" class="hover:text-indigo-600">Trade</a>
+        <a href="/solutions/real-estate.html" class="hover:text-indigo-600">Real Estate</a>
+        <a href="/solutions/logistics.html" class="hover:text-indigo-600">Logistics</a>
+        <a href="/solutions/healthcare.html" class="hover:text-indigo-600">Healthcare</a>
+        <span class="text-slate-300">|</span>
+        <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
+        <a href="/about.html" class="hover:text-indigo-600">About</a>
+        <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-indigo-50 to-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-center">
+      <p class="text-sm font-semibold uppercase tracking-widest text-indigo-600">Made in Skopje, for Macedonian business</p>
+      <h1 class="mt-4 text-4xl lg:text-6xl font-extrabold tracking-tight text-slate-900">
+        Stop chasing paperwork.<br class="hidden sm:block"> Let it chase itself.
+      </h1>
+      <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
+        InnovaQ connects the tools your firm already uses — email, Viber, your invoicing
+        software — and automates the repetitive work that eats your week: payment reminders,
+        stock alerts, appointment confirmations, deadline tracking.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a href="/auth/register.html" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg text-lg transition">Create free account</a>
+        <a href="/auth/login.html" class="bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-semibold px-8 py-3 rounded-lg text-lg transition">Log in</a>
+      </div>
+      <p class="mt-6 text-sm text-slate-500">Prices in denars — <a href="/pricing.html" class="text-indigo-600 hover:underline">see plans</a>. Support in Macedonian and Albanian. No IT department required.</p>
+    </div>
+  </section>
+
+  <!-- Pain points -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-3xl font-bold text-center text-slate-900">Sound familiar?</h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-3xl">📞</p>
+        <h3 class="mt-3 font-semibold text-lg">"Did they pay yet?"</h3>
+        <p class="mt-2 text-slate-600 text-sm">Half your Friday goes to calling clients about unpaid invoices — politely, again, for the third time this month.</p>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-3xl">📋</p>
+        <h3 class="mt-3 font-semibold text-lg">"It's written in a notebook somewhere"</h3>
+        <p class="mt-2 text-slate-600 text-sm">Deadlines for the UJP, contract renewals, supplier orders — tracked in notebooks, sticky notes, and one very tired head.</p>
+      </div>
+      <div class="bg-white rounded-xl border border-slate-200 p-6">
+        <p class="text-3xl">💬</p>
+        <h3 class="mt-3 font-semibold text-lg">"I forgot to message the client"</h3>
+        <p class="mt-2 text-slate-600 text-sm">Your customers live on Viber, but someone has to remember to actually send the reminder. Usually at 11 pm.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-white border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-3xl font-bold text-center text-slate-900">One simple recipe: Trigger → Condition → Action</h2>
+      <p class="mt-3 text-center text-slate-600 max-w-2xl mx-auto">Every InnovaQ workflow follows the same three steps. Pick a ready-made template, tweak it, switch it on.</p>
+      <div class="mt-10 grid gap-6 md:grid-cols-3 text-center">
+        <div class="p-6">
+          <div class="mx-auto w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">1</div>
+          <h3 class="mt-4 font-semibold text-lg">Trigger</h3>
+          <p class="mt-2 text-sm text-slate-600">Something happens — an invoice goes overdue, stock drops, a form is submitted, a date approaches.</p>
+        </div>
+        <div class="p-6">
+          <div class="mx-auto w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">2</div>
+          <h3 class="mt-4 font-semibold text-lg">Condition</h3>
+          <p class="mt-2 text-sm text-slate-600">InnovaQ checks your rule: amount over 500? fewer than 10 left in stock? appointment within 24 hours?</p>
+        </div>
+        <div class="p-6">
+          <div class="mx-auto w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg">3</div>
+          <h3 class="mt-4 font-semibold text-lg">Action</h3>
+          <p class="mt-2 text-sm text-slate-600">A Viber message, an email, or a call to another system goes out automatically. You never touched a thing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Five niches -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-3xl font-bold text-center text-slate-900">Built for five industries we know inside out</h2>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      <a href="/solutions/accounting.html" class="group bg-white rounded-xl border border-slate-200 p-6 hover:border-indigo-400 hover:shadow-md transition">
+        <p class="text-3xl">🧾</p>
+        <h3 class="mt-3 font-semibold group-hover:text-indigo-600">Accounting</h3>
+        <p class="mt-2 text-sm text-slate-600">Invoice reminders, document intake, tax deadlines.</p>
+      </a>
+      <a href="/solutions/trade.html" class="group bg-white rounded-xl border border-slate-200 p-6 hover:border-indigo-400 hover:shadow-md transition">
+        <p class="text-3xl">📦</p>
+        <h3 class="mt-3 font-semibold group-hover:text-indigo-600">Wholesale Trade</h3>
+        <p class="mt-2 text-sm text-slate-600">Stock alerts, supplier orders, B2B follow-ups.</p>
+      </a>
+      <a href="/solutions/real-estate.html" class="group bg-white rounded-xl border border-slate-200 p-6 hover:border-indigo-400 hover:shadow-md transition">
+        <p class="text-3xl">🏢</p>
+        <h3 class="mt-3 font-semibold group-hover:text-indigo-600">Real Estate</h3>
+        <p class="mt-2 text-sm text-slate-600">Lead capture, permit deadlines, contract renewals.</p>
+      </a>
+      <a href="/solutions/logistics.html" class="group bg-white rounded-xl border border-slate-200 p-6 hover:border-indigo-400 hover:shadow-md transition">
+        <p class="text-3xl">🚚</p>
+        <h3 class="mt-3 font-semibold group-hover:text-indigo-600">Logistics</h3>
+        <p class="mt-2 text-sm text-slate-600">Shipment updates, delivery confirmations, invoice checks.</p>
+      </a>
+      <a href="/solutions/healthcare.html" class="group bg-white rounded-xl border border-slate-200 p-6 hover:border-indigo-400 hover:shadow-md transition">
+        <p class="text-3xl">🩺</p>
+        <h3 class="mt-3 font-semibold group-hover:text-indigo-600">Healthcare</h3>
+        <p class="mt-2 text-sm text-slate-600">Appointment reminders, no-show recovery, patient intake.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="bg-indigo-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <h2 class="text-3xl font-bold text-white">Get your evenings back.</h2>
+      <p class="mt-3 text-indigo-100 max-w-xl mx-auto">Set up your first workflow in under ten minutes — no developers, no consultants, no waiting.</p>
+      <a href="/app/dashboard.html" class="mt-8 inline-block bg-white text-indigo-700 hover:bg-indigo-50 font-semibold px-8 py-3 rounded-lg text-lg transition">Open the dashboard</a>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Shared footer ───────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+      <div>
+        <a href="/index.html" class="text-2xl font-extrabold text-white">Innova<span class="text-indigo-400">Q</span></a>
+        <p class="mt-3 text-sm text-slate-400">Workflow automation for small and medium businesses in North Macedonia. Built in Skopje.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/solutions/accounting.html" class="hover:text-white">Accounting</a></li>
+          <li><a href="/solutions/trade.html" class="hover:text-white">Wholesale Trade</a></li>
+          <li><a href="/solutions/real-estate.html" class="hover:text-white">Real Estate</a></li>
+          <li><a href="/solutions/logistics.html" class="hover:text-white">Logistics</a></li>
+          <li><a href="/solutions/healthcare.html" class="hover:text-white">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about.html" class="hover:text-white">About us</a></li>
+          <li><a href="/pricing.html" class="hover:text-white">Pricing</a></li>
+          <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Get started</h3>
+        <p class="mt-3 text-sm text-slate-400">Your first workflow takes ten minutes.</p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">© 2026 InnovaQ DOOEL Skopje. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>

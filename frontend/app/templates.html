@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Library | InnovaQ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ───────────────────────── Shared nav ───────────────────────── -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/index.html" class="text-2xl font-extrabold tracking-tight text-indigo-600">Innova<span class="text-slate-900">Q</span></a>
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="/solutions/accounting.html" class="hover:text-indigo-600">Accounting</a>
+        <a href="/solutions/trade.html" class="hover:text-indigo-600">Trade</a>
+        <a href="/solutions/real-estate.html" class="hover:text-indigo-600">Real Estate</a>
+        <a href="/solutions/logistics.html" class="hover:text-indigo-600">Logistics</a>
+        <a href="/solutions/healthcare.html" class="hover:text-indigo-600">Healthcare</a>
+        <span class="text-slate-300">|</span>
+        <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
+        <a href="/about.html" class="hover:text-indigo-600">About</a>
+        <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- App tab bar -->
+  <div class="bg-white border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-6 text-sm font-medium">
+      <a href="/app/dashboard.html" class="py-3 border-b-2 border-transparent text-slate-600 hover:text-indigo-600">Dashboard</a>
+      <a href="/app/workflows.html" class="py-3 border-b-2 border-transparent text-slate-600 hover:text-indigo-600">My Workflows</a>
+      <a href="/app/templates.html" class="py-3 border-b-2 border-indigo-600 text-indigo-600">Template Library</a>
+      <button id="logout-btn" class="ml-auto py-3 text-slate-500 hover:text-red-600">Log out</button>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
+    <h1 class="text-3xl font-bold text-slate-900">Template Library</h1>
+    <p class="mt-2 text-slate-600">15 ready-made workflows, three per industry. Install one and it appears in <a href="/app/workflows.html" class="text-indigo-600 hover:underline">My Workflows</a> as a draft.</p>
+
+    <div id="library" class="mt-8 space-y-12">
+      <p class="text-slate-400">Loading templates…</p>
+    </div>
+  </main>
+
+  <!-- ───────────────────────── Shared footer ───────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+      <div>
+        <a href="/index.html" class="text-2xl font-extrabold text-white">Innova<span class="text-indigo-400">Q</span></a>
+        <p class="mt-3 text-sm text-slate-400">Workflow automation for small and medium businesses in North Macedonia. Built in Skopje.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/solutions/accounting.html" class="hover:text-white">Accounting</a></li>
+          <li><a href="/solutions/trade.html" class="hover:text-white">Wholesale Trade</a></li>
+          <li><a href="/solutions/real-estate.html" class="hover:text-white">Real Estate</a></li>
+          <li><a href="/solutions/logistics.html" class="hover:text-white">Logistics</a></li>
+          <li><a href="/solutions/healthcare.html" class="hover:text-white">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about.html" class="hover:text-white">About us</a></li>
+          <li><a href="/pricing.html" class="hover:text-white">Pricing</a></li>
+          <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Get started</h3>
+        <p class="mt-3 text-sm text-slate-400">Your first workflow takes ten minutes.</p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">© 2026 InnovaQ DOOEL Skopje. All rights reserved.</div>
+  </footer>
+
+  <script src="/config.js"></script>
+  <script>
+    const API = window.API_BASE_URL;
+    const NICHE_ORDER = ["accounting", "trade", "real_estate", "logistics", "healthcare"];
+    const NICHE_META = {
+      accounting: { label: "Accounting", icon: "🧾" },
+      trade: { label: "Wholesale Trade", icon: "📦" },
+      real_estate: { label: "Real Estate", icon: "🏢" },
+      logistics: { label: "Logistics", icon: "🚚" },
+      healthcare: { label: "Healthcare", icon: "🩺" },
+    };
+
+    async function api(path, options = {}) {
+      const res = await fetch(API + path, {
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        ...options,
+      });
+      if (res.status === 401) {
+        window.location.replace("/index.html");
+        throw new Error("unauthenticated");
+      }
+      return res;
+    }
+
+    function esc(value) {
+      const div = document.createElement("div");
+      div.textContent = String(value ?? "");
+      return div.innerHTML;
+    }
+
+    document.getElementById("logout-btn").addEventListener("click", async () => {
+      try { await api("/auth/logout", { method: "POST" }); } catch (e) {}
+      window.location.replace("/index.html");
+    });
+
+    let templatesById = {};
+
+    async function install(templateId, button) {
+      const template = templatesById[templateId];
+      if (!template) return;
+      button.disabled = true;
+      button.textContent = "Installing…";
+      const res = await api("/v1/workflows", {
+        method: "POST",
+        body: JSON.stringify({
+          name: template.name,
+          niche: template.niche,
+          status: "draft",
+          steps: template.steps,
+        }),
+      });
+      if (res.ok) {
+        button.textContent = "Installed ✓";
+        button.className = "w-full mt-4 bg-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-lg cursor-default";
+        const link = document.createElement("a");
+        link.href = "/app/workflows.html";
+        link.className = "block mt-2 text-center text-xs text-indigo-600 hover:underline";
+        link.textContent = "View in My Workflows →";
+        button.insertAdjacentElement("afterend", link);
+      } else {
+        button.disabled = false;
+        button.textContent = "Install failed — retry";
+      }
+    }
+
+    function card(template) {
+      const meta = NICHE_META[template.niche] || { label: template.niche, icon: "⚙️" };
+      return `<div class="bg-white rounded-xl border border-slate-200 p-6 flex flex-col hover:border-indigo-300 transition">
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(meta.label)}</span>
+          <span class="text-xs text-slate-400">${template.steps.length} steps</span>
+        </div>
+        <h3 class="mt-3 font-bold text-slate-900">${esc(template.name)}</h3>
+        <p class="mt-2 text-sm text-slate-600 flex-1">${esc(template.description)}</p>
+        <button data-template="${esc(template.template_id)}"
+          class="install-btn w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">
+          Install
+        </button>
+      </div>`;
+    }
+
+    async function load() {
+      // Auth gate: /v1/templates is public, so probe an auth-only endpoint first.
+      await api("/v1/workflows");
+
+      const templates = await (await api("/v1/templates")).json();
+      templatesById = Object.fromEntries(templates.map((t) => [t.template_id, t]));
+
+      const byNiche = {};
+      for (const t of templates) (byNiche[t.niche] = byNiche[t.niche] || []).push(t);
+
+      document.getElementById("library").innerHTML = NICHE_ORDER.filter((n) => byNiche[n])
+        .map((niche) => {
+          const meta = NICHE_META[niche];
+          return `<section>
+            <h2 class="text-xl font-bold text-slate-900">${meta.icon} ${esc(meta.label)}</h2>
+            <div class="mt-4 grid gap-6 md:grid-cols-3">
+              ${byNiche[niche].map(card).join("")}
+            </div>
+          </section>`;
+        })
+        .join("");
+    }
+
+    document.getElementById("library").addEventListener("click", (event) => {
+      const button = event.target.closest("button.install-btn");
+      if (button) install(button.dataset.template, button);
+    });
+
+    load().catch((err) => console.error(err));
+  </script>
+</body>
+</html>

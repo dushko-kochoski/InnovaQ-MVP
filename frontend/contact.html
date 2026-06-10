@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | InnovaQ</title>
+  <meta name="description" content="Get in touch with the InnovaQ team in Skopje — email, Viber, or visit our office.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- ───────────────────────── Shared nav ───────────────────────── -->
+  <header class="bg-white/90 backdrop-blur border-b border-slate-200 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/index.html" class="text-2xl font-extrabold tracking-tight text-indigo-600">Innova<span class="text-slate-900">Q</span></a>
+      <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="/solutions/accounting.html" class="hover:text-indigo-600">Accounting</a>
+        <a href="/solutions/trade.html" class="hover:text-indigo-600">Trade</a>
+        <a href="/solutions/real-estate.html" class="hover:text-indigo-600">Real Estate</a>
+        <a href="/solutions/logistics.html" class="hover:text-indigo-600">Logistics</a>
+        <a href="/solutions/healthcare.html" class="hover:text-indigo-600">Healthcare</a>
+        <span class="text-slate-300">|</span>
+        <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
+        <a href="/about.html" class="hover:text-indigo-600">About</a>
+        <a href="/contact.html" class="text-indigo-600 font-semibold">Contact</a>
+      </div>
+      <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-indigo-50 to-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+      <h1 class="text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">Talk to a person. In Skopje. Today.</h1>
+      <p class="mt-4 max-w-2xl mx-auto text-lg text-slate-600">
+        Questions before you start? Want us to walk through your current process and tell you
+        honestly what's worth automating? Write to us — we answer the same business day.
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-10 lg:grid-cols-2">
+
+    <!-- Contact form -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-8">
+      <h2 class="text-xl font-bold text-slate-900">Send us a message</h2>
+      <form class="mt-6 space-y-5" action="#" method="post">
+        <div>
+          <label for="name" class="block text-sm font-medium text-slate-700">Your name</label>
+          <input type="text" id="name" name="name" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. Elena Stojanovska">
+        </div>
+        <div>
+          <label for="company" class="block text-sm font-medium text-slate-700">Company</label>
+          <input type="text" id="company" name="company" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. Stojanovski Konsalting DOOEL">
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+          <input type="email" id="email" name="email" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="you@company.mk">
+        </div>
+        <div>
+          <label for="niche" class="block text-sm font-medium text-slate-700">Your industry</label>
+          <select id="niche" name="niche" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <option>Accounting</option>
+            <option>Wholesale trade</option>
+            <option>Real estate</option>
+            <option>Logistics</option>
+            <option>Healthcare</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-slate-700">What would you like to automate?</label>
+          <textarea id="message" name="message" rows="4" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g. We send ~80 invoice reminders a month by hand…"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition">Send message</button>
+        <p class="text-xs text-slate-500 text-center">We reply within one business day — usually much faster.</p>
+      </form>
+    </div>
+
+    <!-- Direct contact details -->
+    <div class="space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-8">
+        <h2 class="text-xl font-bold text-slate-900">Reach us directly</h2>
+        <ul class="mt-6 space-y-4 text-slate-600">
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">📧</span>
+            <div>
+              <p class="font-semibold text-slate-800">Email</p>
+              <p class="text-sm">zdravo@innovaq.mk</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">💬</span>
+            <div>
+              <p class="font-semibold text-slate-800">Viber / Phone</p>
+              <p class="text-sm">+389 70 123 456 (Mon–Fri, 09–17h)</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">📍</span>
+            <div>
+              <p class="font-semibold text-slate-800">Office</p>
+              <p class="text-sm">Partizanski Odredi 42, 1000 Skopje<br>North Macedonia</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-indigo-50 rounded-2xl border border-indigo-100 p-8">
+        <h3 class="font-bold text-slate-900">Prefer to just try it?</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          You don't need a sales call. Open the dashboard, pick a template for your industry,
+          and have your first workflow running before your coffee gets cold.
+        </p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition">Open Dashboard</a>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 p-8">
+        <h3 class="font-bold text-slate-900">For accountants &amp; agencies</h3>
+        <p class="mt-2 text-sm text-slate-600">
+          Managing workflows for multiple clients? Ask about our partner program —
+          several Skopje accounting offices already run InnovaQ for their whole client list.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── Shared footer ───────────────────────── -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid gap-8 md:grid-cols-4">
+      <div>
+        <a href="/index.html" class="text-2xl font-extrabold text-white">Innova<span class="text-indigo-400">Q</span></a>
+        <p class="mt-3 text-sm text-slate-400">Workflow automation for small and medium businesses in North Macedonia. Built in Skopje.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Solutions</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/solutions/accounting.html" class="hover:text-white">Accounting</a></li>
+          <li><a href="/solutions/trade.html" class="hover:text-white">Wholesale Trade</a></li>
+          <li><a href="/solutions/real-estate.html" class="hover:text-white">Real Estate</a></li>
+          <li><a href="/solutions/logistics.html" class="hover:text-white">Logistics</a></li>
+          <li><a href="/solutions/healthcare.html" class="hover:text-white">Healthcare</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Company</h3>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="/about.html" class="hover:text-white">About us</a></li>
+          <li><a href="/pricing.html" class="hover:text-white">Pricing</a></li>
+          <li><a href="/contact.html" class="hover:text-white">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-white uppercase tracking-wider">Get started</h3>
+        <p class="mt-3 text-sm text-slate-400">Your first workflow takes ten minutes.</p>
+        <a href="/app/dashboard.html" class="mt-4 inline-block bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">© 2026 InnovaQ DOOEL Skopje. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
