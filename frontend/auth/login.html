@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log in | InnovaQ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/translations.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -22,6 +23,11 @@
         <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
         <a href="/about.html" class="hover:text-indigo-600">About</a>
         <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <div class="flex items-center text-sm font-medium">
+        <button data-lang-btn="mk" onclick="setLanguage('mk')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">МК</button>
+        <span class="text-slate-300">/</span>
+        <button data-lang-btn="en" onclick="setLanguage('en')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">EN</button>
       </div>
       <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
     </nav>
@@ -119,7 +125,7 @@
       const button = document.getElementById("submit-btn");
       errorEl.classList.add("hidden");
       button.disabled = true;
-      button.textContent = "Logging in…";
+      button.textContent = t("js.loggingIn");
 
       try {
         const res = await fetch(API + "/auth/login", {
@@ -137,16 +143,16 @@
           return;
         }
         if (res.status === 401) {
-          errorEl.textContent = "Invalid email or password.";
+          errorEl.textContent = t("js.loginInvalid");
         } else {
-          errorEl.textContent = "Login failed (" + res.status + "). Please try again.";
+          errorEl.textContent = t("js.loginFailed").replace("{status}", res.status);
         }
       } catch (err) {
-        errorEl.textContent = "Could not reach the server at " + API + " — is the backend running?";
+        errorEl.textContent = t("js.netFail").replace("{api}", API);
       }
       errorEl.classList.remove("hidden");
       button.disabled = false;
-      button.textContent = "Log in";
+      button.textContent = t("js.login");
     });
   </script>
 </body>

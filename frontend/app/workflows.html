@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Workflows | InnovaQ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/translations.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -22,6 +23,11 @@
         <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
         <a href="/about.html" class="hover:text-indigo-600">About</a>
         <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <div class="flex items-center text-sm font-medium">
+        <button data-lang-btn="mk" onclick="setLanguage('mk')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">МК</button>
+        <span class="text-slate-300">/</span>
+        <button data-lang-btn="en" onclick="setLanguage('en')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">EN</button>
       </div>
       <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
     </nav>
@@ -120,13 +126,6 @@
   <script src="/config.js"></script>
   <script>
     const API = window.API_BASE_URL;
-    const NICHE_LABELS = {
-      accounting: "Accounting",
-      trade: "Wholesale Trade",
-      real_estate: "Real Estate",
-      logistics: "Logistics",
-      healthcare: "Healthcare",
-    };
 
     async function api(path, options = {}) {
       const res = await fetch(API + path, {
@@ -164,7 +163,7 @@
       const name = document.getElementById("new-name").value.trim();
       const errorEl = document.getElementById("form-error");
       errorEl.textContent = "";
-      if (!name) { errorEl.textContent = "Name is required."; return; }
+      if (!name) { errorEl.textContent = t("js.nameRequired"); return; }
       const res = await api("/v1/workflows", {
         method: "POST",
         body: JSON.stringify({
@@ -174,7 +173,7 @@
           steps: [{ step: 1, type: "trigger", action_type: "webhook_receive" }],
         }),
       });
-      if (!res.ok) { errorEl.textContent = "Create failed (" + res.status + ")."; return; }
+      if (!res.ok) { errorEl.textContent = t("js.createFailed").replace("{status}", res.status); return; }
       document.getElementById("new-name").value = "";
       newForm.classList.add("hidden");
       await load();
@@ -190,7 +189,7 @@
     }
 
     async function removeWorkflow(workflowId, name) {
-      if (!window.confirm('Delete workflow "' + name + '"? This cannot be undone.')) return;
+      if (!window.confirm(t("js.confirmDelete").replace("{name}", name))) return;
       await api("/v1/workflows/" + workflowId, { method: "DELETE" });
       await load();
     }
@@ -198,13 +197,13 @@
     function statusControls(workflow) {
       // active ⇄ paused toggle; drafts get an Activate button
       if (workflow.status === "active") {
-        return `<button data-action="pause" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 hover:bg-emerald-200" title="Click to pause">● active</button>`;
+        return `<button data-action="pause" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 hover:bg-emerald-200" title="${t("js.titlePause")}">● ${t("js.active")}</button>`;
       }
       if (workflow.status === "paused") {
-        return `<button data-action="activate" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 hover:bg-amber-200" title="Click to activate">❚❚ paused</button>`;
+        return `<button data-action="activate" class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 hover:bg-amber-200" title="${t("js.titleActivate")}">❚❚ ${t("js.paused")}</button>`;
       }
-      return `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 mr-1">draft</span>
-        <button data-action="activate" class="text-xs font-semibold text-indigo-600 hover:underline">Activate</button>`;
+      return `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-500 mr-1">${t("js.draft")}</span>
+        <button data-action="activate" class="text-xs font-semibold text-indigo-600 hover:underline">${t("js.activate")}</button>`;
     }
 
     async function load() {
@@ -213,17 +212,17 @@
       if (workflows.length === 0) {
         rows.innerHTML =
           '<tr><td colspan="5" class="px-5 py-10 text-center text-slate-400">' +
-          'No workflows yet. Create one above or <a href="/app/templates.html" class="text-indigo-600 hover:underline">install a template</a>.</td></tr>';
+          t("js.noWorkflows") + "</td></tr>";
         return;
       }
       rows.innerHTML = workflows
         .map(
           (w) => `<tr data-id="${esc(w.workflow_id)}" data-name="${esc(w.name)}">
             <td class="px-5 py-3 font-medium">${esc(w.name)}</td>
-            <td class="px-5 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(NICHE_LABELS[w.niche] || w.niche)}</span></td>
+            <td class="px-5 py-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(t("js.niche." + w.niche))}</span></td>
             <td class="px-5 py-3 whitespace-nowrap">${statusControls(w)}</td>
             <td class="px-5 py-3"><code class="text-xs text-slate-500">/v1/triggers/webhook/${esc(w.route_key)}</code></td>
-            <td class="px-5 py-3 text-right"><button data-action="delete" class="text-xs font-semibold text-red-600 hover:underline">Delete</button></td>
+            <td class="px-5 py-3 text-right"><button data-action="delete" class="text-xs font-semibold text-red-600 hover:underline">${t("js.delete")}</button></td>
           </tr>`
         )
         .join("");
@@ -241,6 +240,7 @@
     });
 
     load().catch((err) => console.error(err));
+    document.addEventListener("langchange", () => load().catch(() => {}));
   </script>
 </body>
 </html>

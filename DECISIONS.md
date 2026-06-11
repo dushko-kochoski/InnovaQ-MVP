@@ -135,3 +135,21 @@ build step, works from file drag-and-drop hosting). `config.js` picks the
 local API when served from `localhost`/`127.0.0.1` and `PRODUCTION_API`
 otherwise, so the same artifact works in dev and on Netlify; the production
 URL is edited in exactly one place after the backend deploy.
+
+### D18. i18n via text-matching runtime, not per-element attributes
+The МК/EN toggle (default: Macedonian, persisted in localStorage under
+`innovaq_lang`) is implemented in `frontend/translations.js`, which holds
+both the 300-key en/mk dictionary and the runtime. Instead of hand-tagging
+every element with `data-i18n` across 14 pages, the runtime annotates
+elements at load time by matching their normalized English text (tags
+stripped, `&amp;` decoded, whitespace collapsed) against the `en` map, then
+swaps `innerHTML` on toggle; placeholders match `el.placeholder` the same
+way. Pages therefore only carry the script include and the toggle markup
+(injected by `scripts/inject_i18n.py`). The trade-off — a dictionary value
+that drifts from the page text silently stays English — is policed by
+`scripts/check_i18n.py`, which fails if any static `en` value matches no
+page (run it after editing copy). Dynamic JS-rendered strings use
+`window.t("js.*")` and pages re-render on the `langchange` event. DB-stored
+template names/descriptions stay as seeded (English) — translating data is
+a backend concern for later. Cyrillic plan names (Старт/Бизнис/Про) are
+identical in both languages by design.

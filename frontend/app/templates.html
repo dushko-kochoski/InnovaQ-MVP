@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Template Library | InnovaQ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/translations.js"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
 
@@ -22,6 +23,11 @@
         <a href="/pricing.html" class="hover:text-indigo-600">Pricing</a>
         <a href="/about.html" class="hover:text-indigo-600">About</a>
         <a href="/contact.html" class="hover:text-indigo-600">Contact</a>
+      </div>
+      <div class="flex items-center text-sm font-medium">
+        <button data-lang-btn="mk" onclick="setLanguage('mk')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">МК</button>
+        <span class="text-slate-300">/</span>
+        <button data-lang-btn="en" onclick="setLanguage('en')" class="px-1.5 py-0.5 text-slate-500 hover:text-indigo-600">EN</button>
       </div>
       <a href="/app/dashboard.html" class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">Open Dashboard</a>
     </nav>
@@ -84,12 +90,12 @@
   <script>
     const API = window.API_BASE_URL;
     const NICHE_ORDER = ["accounting", "trade", "real_estate", "logistics", "healthcare"];
-    const NICHE_META = {
-      accounting: { label: "Accounting", icon: "🧾" },
-      trade: { label: "Wholesale Trade", icon: "📦" },
-      real_estate: { label: "Real Estate", icon: "🏢" },
-      logistics: { label: "Logistics", icon: "🚚" },
-      healthcare: { label: "Healthcare", icon: "🩺" },
+    const NICHE_ICONS = {
+      accounting: "🧾",
+      trade: "📦",
+      real_estate: "🏢",
+      logistics: "🚚",
+      healthcare: "🩺",
     };
 
     async function api(path, options = {}) {
@@ -122,7 +128,7 @@
       const template = templatesById[templateId];
       if (!template) return;
       button.disabled = true;
-      button.textContent = "Installing…";
+      button.textContent = t("js.installing");
       const res = await api("/v1/workflows", {
         method: "POST",
         body: JSON.stringify({
@@ -133,31 +139,30 @@
         }),
       });
       if (res.ok) {
-        button.textContent = "Installed ✓";
+        button.textContent = t("js.installed");
         button.className = "w-full mt-4 bg-emerald-600 text-white text-sm font-semibold px-4 py-2 rounded-lg cursor-default";
         const link = document.createElement("a");
         link.href = "/app/workflows.html";
         link.className = "block mt-2 text-center text-xs text-indigo-600 hover:underline";
-        link.textContent = "View in My Workflows →";
+        link.textContent = t("js.viewWf");
         button.insertAdjacentElement("afterend", link);
       } else {
         button.disabled = false;
-        button.textContent = "Install failed — retry";
+        button.textContent = t("js.installFailed");
       }
     }
 
     function card(template) {
-      const meta = NICHE_META[template.niche] || { label: template.niche, icon: "⚙️" };
       return `<div class="bg-white rounded-xl border border-slate-200 p-6 flex flex-col hover:border-indigo-300 transition">
         <div class="flex items-center justify-between">
-          <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(meta.label)}</span>
-          <span class="text-xs text-slate-400">${template.steps.length} steps</span>
+          <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700">${esc(t("js.niche." + template.niche))}</span>
+          <span class="text-xs text-slate-400">${template.steps.length} ${t("js.steps")}</span>
         </div>
         <h3 class="mt-3 font-bold text-slate-900">${esc(template.name)}</h3>
         <p class="mt-2 text-sm text-slate-600 flex-1">${esc(template.description)}</p>
         <button data-template="${esc(template.template_id)}"
           class="install-btn w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">
-          Install
+          ${t("js.install")}
         </button>
       </div>`;
     }
@@ -173,15 +178,12 @@
       for (const t of templates) (byNiche[t.niche] = byNiche[t.niche] || []).push(t);
 
       document.getElementById("library").innerHTML = NICHE_ORDER.filter((n) => byNiche[n])
-        .map((niche) => {
-          const meta = NICHE_META[niche];
-          return `<section>
-            <h2 class="text-xl font-bold text-slate-900">${meta.icon} ${esc(meta.label)}</h2>
+        .map((niche) => `<section>
+            <h2 class="text-xl font-bold text-slate-900">${NICHE_ICONS[niche] || "⚙️"} ${esc(t("js.niche." + niche))}</h2>
             <div class="mt-4 grid gap-6 md:grid-cols-3">
               ${byNiche[niche].map(card).join("")}
             </div>
-          </section>`;
-        })
+          </section>`)
         .join("");
     }
 
@@ -191,6 +193,7 @@
     });
 
     load().catch((err) => console.error(err));
+    document.addEventListener("langchange", () => load().catch(() => {}));
   </script>
 </body>
 </html>
